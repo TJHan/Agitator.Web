@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Agitator.Business.Services;
 using Agitator.Business.Entity.CommonEntity;
+using Agitator.Business.Entity.SystemEntity;
 
 namespace Agitator.WebSite.Controllers
 {
@@ -12,11 +13,11 @@ namespace Agitator.WebSite.Controllers
     {
         public ActionResult Index()
         {
-            CommonCompanyService service = new CommonCompanyService();
-            var result = service.APIGetCompanyTypeList();
-            AccountService aservice = new AccountService();
-            aservice.APILogin("admin", "admin");
-            return View(result);
+            MenuService mService = new MenuService();
+            Menu[] menuList = mService.GetUserSystemMenu("admin1");
+            Models.SystemModels.MenuModel model = new Models.SystemModels.MenuModel();
+            model.MenuList = menuList;
+            return View(model);
         }
 
         public ActionResult About()

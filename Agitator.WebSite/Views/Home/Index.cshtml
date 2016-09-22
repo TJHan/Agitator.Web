@@ -1,19 +1,34 @@
-﻿@using Agitator.Business.Entity.CommonEntity;
-@model CompanyTypeItem[]
+﻿@using Agitator.Business.Entity.SystemEntity;
+@using Agitator.WebSite.Models.SystemModels;
+@model MenuModel
 @{
     Layout = null;
 }
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>Index</title>
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/themes/bootstrap/css")    
-    @Scripts.Render("~/bundles/jquery")    
+    @Styles.Render("~/Content/themes/bootstrap/css")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/easyui")
     @Scripts.Render("~/bundles/easyui/custom")
+    <script>
+        function OpenFrame(tabTitle, id) {
+            var tab = $("#mainTab");
+            if (tab.tabs('exists', tabTitle)) {
+                tab.tabs('select', tabTitle);
+            } else {
+                var html = '<iframe scrolling="auto" frameborder="0"  src="@Url.Action("Contact","Home")" style="width:100%;height:100%;"></iframe>';
+                tab.tabs('add', {
+                    title: tabTitle,
+                    content: html,
+                    closable: true
+                });
+            }
+        }
+    </script>
 </head>
 <body class="easyui-layout">
     <div id="OverTimeLogin" class="easyui-dialog" data-options="closed:true,modal:true">
@@ -26,39 +41,48 @@
                 <div id="LoginBotoomLine">MVC4+EF5.0+EasyUI</div>
             </div>
             <div class="define-account">
-
             </div>
         </div>
     </div>
     <div data-options="region:'west',split:true,title:'菜单列表'" style="width: 200px; height:100%; padding-top: 2px; background-color:#fff; overflow:auto">
         <div id="RightTree" style=" background-color:#fff;">
-            <div class="panel-loading">加载中...</div>
-            @{
-                if (Model != null)
-                {                    
-                    foreach (var item in Model)
+            @*<div class="panel-loading">加载中...</div>*@
+
+            <div class="easyui-accordion" style="width:100%;height:600px;">
+                @{
+                    if (Model != null)
                     {
-                        <div>
-                            @item.id | @item.type | @item.typeId
-                        </div>
+                        foreach (var item in Model.MenuList)
+                        {
+                            if (item.parentId == 0 && item.isModelCategory)
+                            {
+                                <div title="@item.functionName" iconCls="icon-ok" style="overflow:auto;padding:10px;">
+                                    <ul id="tt1" class="easyui-tree">
+                                        @foreach (var subItem in Model.MenuList)
+                                        {
+                                            if (subItem.parentId == item.id && subItem.isModelEntry)
+                                            {
+                                                <li><a onclick="OpenFrame('@subItem.functionName',@item.id)"><span>@subItem.functionName</span></a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        }
                     }
                 }
-            }
+            </div>
         </div>
     </div>
     <div data-options="region:'south',border:false" style="height: 20px;">
         <div class="define-bottom">
 
-
         </div>
     </div>
     <div data-options="region:'center',border:false">
         <div id="mainTab" class="easyui-tabs" data-options="fit:true">
-            <div title="我的桌面" data-options="closable:true" style="overflow: hidden; background:#fff">
+            <div title="我的桌面" data-options="closable:false" style="overflow: hidden; background:#fff">
                 <iframe scrolling="auto" frameborder="0" src="" style="width: 100%; height: 100%;"></iframe>
-            </div>
-            <div title="合同管理" data-options="closable:true" style="overflow: hidden; background:#fff">
-                <iframe scrolling="auto" frameborder="0" src="@Url.Action("Contact","Home")" style="width: 100%; height: 100%;"></iframe>
             </div>
         </div>
     </div>

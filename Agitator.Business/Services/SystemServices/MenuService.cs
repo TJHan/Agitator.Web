@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Agitator.Business.Entity.SystemEntity;
 using Agitator.Business.HttpHandler;
 
-namespace Agitator.Business.Services.SystemServices
+namespace Agitator.Business.Services
 {
-    public class MenuService:BaseService
+    public class MenuService : BaseService
     {
         /// <summary>
         /// 获取登陆用户的已授权系统板块集合
@@ -16,8 +16,8 @@ namespace Agitator.Business.Services.SystemServices
         /// <param name="userName"></param>
         /// <returns></returns>
         public Menu[] GetUserSystemMenu(string userName)
-        { 
-            Dictionary<string,string> dicList=new Dictionary<string,string>(){
+        {
+            Dictionary<string, string> dicList = new Dictionary<string, string>(){
                 {"loginName",userName}
             };
             Menu[] result = CallAPIHelper.CallAPIInPOST<Menu[]>("/zjyhj/sysPower/getSysPowerByLoginName", dicList);
