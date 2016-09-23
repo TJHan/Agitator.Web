@@ -22,7 +22,7 @@ namespace Agitator.Business.Services
         /// 获取企业单位类型集合
         /// </summary>
         /// <returns></returns>
-        public CompanyTypeItem[] APIGetCompanyTypeList()
+        public CompanyTypeItem[] GetCompanyTypeList()
         {
             var result = CallAPIHelper.CallAPIInGET<CompanyTypeItem[]>("/zjyhj/pact/unit/getTypeList");
             return result;            
@@ -32,7 +32,7 @@ namespace Agitator.Business.Services
         /// 获取企业等级类型集合
         /// </summary>
         /// <returns></returns>
-        public CompanyGradeItem[] APIGetCompanyGradeList()
+        public CompanyGradeItem[] GetCompanyGradeList()
         {
             var result = CallAPIHelper.CallAPIInGET<CompanyGradeItem[]>("/zjyhj/pact/unit/getTypeList");
             return result;

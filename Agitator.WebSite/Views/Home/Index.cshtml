@@ -1,6 +1,7 @@
 ﻿@using Agitator.Business.Entity.SystemEntity;
 @using Agitator.WebSite.Models.SystemModels;
-@model MenuModel
+@using Agitator.Business.Common;
+@model MainPageModel
 @{
     Layout = null;
 }
@@ -20,7 +21,7 @@
             if (tab.tabs('exists', tabTitle)) {
                 tab.tabs('select', tabTitle);
             } else {
-                var html = '<iframe scrolling="auto" frameborder="0"  src="@Url.Action("Contact","Home")" style="width:100%;height:100%;"></iframe>';
+                var html = '<iframe scrolling="auto" frameborder="0"  src="@Url.Action("Index", "Company", new { area = "Contract" })" style="width:100%;height:100%;"></iframe>';
                 tab.tabs('add', {
                     title: tabTitle,
                     content: html,
@@ -41,6 +42,7 @@
                 <div id="LoginBotoomLine">MVC4+EF5.0+EasyUI</div>
             </div>
             <div class="define-account">
+
             </div>
         </div>
     </div>

@@ -6,32 +6,44 @@ using System.Web.Mvc;
 using Agitator.Business.Services;
 using Agitator.Business.Entity.CommonEntity;
 using Agitator.Business.Entity.SystemEntity;
+using Agitator.Business.Models.Home;
+using Agitator.Business.Filters;
+using Agitator.Business.Common;
 
 namespace Agitator.WebSite.Controllers
 {
     public class HomeController : Controller
     {
+        [Auth("")]
         public ActionResult Index()
         {
             MenuService mService = new MenuService();
             Menu[] menuList = mService.GetUserSystemMenu("admin1");
-            Models.SystemModels.MenuModel model = new Models.SystemModels.MenuModel();
+            Models.SystemModels.MainPageModel model = new Models.SystemModels.MainPageModel();
             model.MenuList = menuList;
             return View(model);
         }
 
-        public ActionResult About()
+        public ActionResult Login()
         {
-            ViewBag.Message = "Your application description page.";
-
+            if (RequestUser.CurrentRequestUser.IsLogin)
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult Login(LoginModel model)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            AccountService aService = new AccountService();
+            bool result = aService.UserLogin(model.UserName, model.Password);
+            if (result)
+            {
+                return RedirectToAction("Index");
+            }
+            model.errorMessage = "用户名或密码错误";
+            return View(model);
         }
     }
 }

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Agitator.Business.Entity.SystemEntity;
 using Agitator.Business.HttpHandler;
+using Agitator.Business.Common;
+using Rock.Common.Helper;
 
 namespace Agitator.Business.Services
 {
@@ -17,11 +19,20 @@ namespace Agitator.Business.Services
         /// <returns></returns>
         public Menu[] GetUserSystemMenu(string userName)
         {
-            Dictionary<string, string> dicList = new Dictionary<string, string>(){
-                {"loginName",userName}
-            };
-            Menu[] result = CallAPIHelper.CallAPIInPOST<Menu[]>("/zjyhj/sysPower/getSysPowerByLoginName", dicList);
+            Menu[] result = SessionHelper.GetSession<Menu[]>(SessionKeys.LoginUserMenu);
+            if (result == null)
+            {
+                Dictionary<string, string> dicList = new Dictionary<string, string>(){
+                    {"loginName",userName}
+                };
+                result = CallAPIHelper.CallAPIInPOST<Menu[]>("/zjyhj/sysPower/getSysPowerByLoginName", dicList);
+                if (result != null)
+                {
+                    SessionHelper.SetSession(SessionKeys.LoginUserMenu, result);
+                }
+            }
             return result;
         }
+
     }
 }
