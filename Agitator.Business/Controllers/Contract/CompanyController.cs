@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Agitator.Business.Filters;
+using Agitator.Business.Services.ContractServices;
+using Agitator.Business.ParameterEntity;
 
 namespace Agitator.Business.Controllers.Contract
 {
@@ -18,6 +20,16 @@ namespace Agitator.Business.Controllers.Contract
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult LoadCompanyList()
+        {
+            CompanyServices cService = new CompanyServices();
+            ParamsCompanySearch earchEntity = new ParamsCompanySearch();
+
+            var result = cService.GetCompanyList(earchEntity);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

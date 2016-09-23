@@ -31,6 +31,12 @@ namespace Agitator.WebSite
             bundles.Add(new ScriptBundle("~/bundles/easyui").Include(
                 "~/Scripts/jquery.easyui-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/easyui/custom").Include(
+                "~/Scripts/easyUI/EasyUI.js"));
+
+            //数据列表JS
+            bundles.Add(new ScriptBundle("~/bundles/easyui/datagrid").Include("~/Scripts/easyUI/datagrid-detailview.js"));
+
             //EasyUI灰色风格样式
             bundles.Add(new StyleBundle("~/Content/themes/gray/css").IncludeDirectory("~/Content/themes/gray", "*.css"));
 
@@ -38,8 +44,7 @@ namespace Agitator.WebSite
 
             bundles.Add(new StyleBundle("~/Content/themes/bootstrap/css").IncludeDirectory("~/Content/themes/bootstrap", "*.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/easyui/custom").Include(
-                "~/Scripts/easyUI/EasyUI.js"));
+
         }
     }
 }

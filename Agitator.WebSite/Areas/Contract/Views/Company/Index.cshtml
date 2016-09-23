@@ -1,28 +1,60 @@
-﻿<div data-options="region:'north',border:false,split:true" style="height: 60px;">
-    <div class="define-head">
-        <div class="define-logo">
-            <div id="LoginTopLine">System Manage</div>
-            <div id="LoginBotoomLine">MVC4+EF5.0+EasyUI</div>
-        </div>
-        <div class="define-account">
-        </div>
-    </div>
-</div>
-<div data-options="region:'west',split:true,title:'菜单列表'" style="width: 200px; height:100%; padding-top: 2px; background-color:#fff; overflow:auto">
-    <div id="RightTree" style=" background-color:#fff;">
-        <div class="panel-loading">加载中...</div>
+﻿@{
+    Layout = null;
+}
 
-    </div>
-</div>
-<div data-options="region:'south',border:false" style="height: 20px;">
-    <div class="define-bottom">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/gray/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @*引用easyui脚本*@
+    @Scripts.Render("~/bundles/easyui")
+    @Scripts.Render("~/bundles/easyui/datagrid")
+    <script>
+        $(function () {
+        $("#tt").datagrid({
+            title: "企业单位列表",
+            url: '/Contract/Company/LoadCompanyList',
+            method: 'GET',
+            width: '700',
+            iconCls: 'icon-save',
+            dataType: 'json',
+            rownumbers: true, //是否加行号
+            pageSize: 50, //页容量，必须和pageList对应起来，否则会报错            
+            //pageList: [15, 30, 45],//分页中下拉选项的数值
+            columns: [[
+                { field: 'id', title: 'id' },
+                { field: 'uname', title: '企业名称' },
+                { field: 'setMan', title: '法人' }
+            ]],
+            singleSelect: true, //允许选择多行
+            view: 'scrollview',
+            autoRowHeight: false,
+            height:'300'
+        });
+    })
+    </script>
+</head>
+<body>
+    数据
+    @*<table id="tabList" class="easyui-datagrid" style="width:700px;height:300px"
+           title="DataGrid - VirtualScrollView"
+           data-options="view:scrollview,rownumbers:true,singleSelect:true,url:'@Url.Action("LoadCompanyList", "Company", new { area = "Contract" })',autoRowHeight:false,pageSize:50">
+        <thead>
+            <tr>
+                <th field="id" width="80">id</th>
+                <th field="uname" width="100">企业名称</th>
+                <th field="setMan" width="80">法人</th>
+            </tr>
+        </thead>
+    </table>*@
 
-    </div>
-</div>
-<div data-options="region:'center',border:false">
-    <div id="mainTab" class="easyui-tabs" data-options="fit:true">
-        <div title="我的桌面" data-options="closable:false" style="overflow: hidden; background:#fff">
-            <iframe scrolling="auto" frameborder="0" src="" style="width: 100%; height: 100%;"></iframe>
-        </div>
-    </div>
-</div>
+    <table id="tt" class="easyui-datagrid"></table>
+</body>
+</html>

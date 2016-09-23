@@ -7,14 +7,14 @@
     <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/gray/css")
-    @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @*引用easyui脚本*@
+        @Scripts.Render("~/bundles/easyui")
 </head>
 <body>
     我是头
     @RenderBody()
-    @Scripts.Render("~/bundles/jquery")
-    @*引用easyui脚本*@
-    @Scripts.Render("~/bundles/easyui")
     @RenderSection("scripts", required: false)
 </body>
 </html>
