@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Agitator.Business.Filters;
 using Agitator.Business.Services.ContractServices;
 using Agitator.Business.ParameterEntity;
+using Rock.Common.Helper;
 
 namespace Agitator.Business.Controllers.Contract
 {
@@ -17,18 +18,44 @@ namespace Agitator.Business.Controllers.Contract
     [Auth("AgitatorSite_Contract_OrderContract")]
     public class CompanyController : AgitatorControllerBase
     {
+        private CompanyServices _cServices;
+        public CompanyController()
+        {
+            _cServices = new CompanyServices();
+        }
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult LoadCompanyList()
+        public ActionResult LoadCompanyList(ParamsCompanySearch queryData)
         {
-            CompanyServices cService = new CompanyServices();
-            ParamsCompanySearch earchEntity = new ParamsCompanySearch();
+            queryData.PageIndex = 0;
+            queryData.PageSize = 0;
+            var result = _cServices.GetCompanyList(queryData);            
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
-            var result = cService.GetCompanyList(earchEntity);
+        /// <summary>
+        /// 单位详情页面Action
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var result = _cServices.GetCompanyDetails(id);
+            return View(result);
+        }
 
+        /// <summary>
+        /// 删除单位记录Action
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            var result = _cServices.DeleteCompany(id);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

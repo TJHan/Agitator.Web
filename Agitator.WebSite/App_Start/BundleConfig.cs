@@ -35,7 +35,7 @@ namespace Agitator.WebSite
                 "~/Scripts/easyUI/EasyUI.js"));
 
             //数据列表JS
-            bundles.Add(new ScriptBundle("~/bundles/easyui/datagrid").Include("~/Scripts/easyUI/datagrid-detailview.js"));
+            bundles.Add(new ScriptBundle("~/bundles/easyui/datagrid").Include("~/Scripts/easyUI/datagrid-scrollview.js"));
 
             //EasyUI灰色风格样式
             bundles.Add(new StyleBundle("~/Content/themes/gray/css").IncludeDirectory("~/Content/themes/gray", "*.css"));

@@ -63,6 +63,7 @@ namespace Agitator.Business.HttpHandler
                     {
                         postData.Add(item.Key, item.Value);
                     }
+                    
                     byte[] bytes = client.UploadValues(methodAddress, "POST", postData);
                     string result = WebSiteEncodingSetting.SiteDefaultEncoding().GetString(bytes);
                     return JsonConvert.DeserializeObject<T>(result);

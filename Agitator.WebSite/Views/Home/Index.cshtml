@@ -21,7 +21,7 @@
             if (tab.tabs('exists', tabTitle)) {
                 tab.tabs('select', tabTitle);
             } else {
-                var html = '<iframe scrolling="auto" frameborder="0"  src="@Url.Action("Index", "Company", new { area = "Contract" })" style="width:100%;height:100%;"></iframe>';
+                var html = '<iframe scrolling="auto" frameborder="0"  src="@Url.Action("Index", "Company", new { area = "Contract" })" style="width:100%;height:1000px;"></iframe>';
                 tab.tabs('add', {
                     title: tabTitle,
                     content: html,

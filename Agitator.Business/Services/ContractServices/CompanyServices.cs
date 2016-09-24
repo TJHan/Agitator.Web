@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Agitator.Business.Entity.ContractEntity;
 using Agitator.Business.ParameterEntity;
 using Agitator.Business.HttpHandler;
+using Agitator.Business.Helper;
+using Agitator.Business.Common;
+using Agitator.Business.Entity;
 
 namespace Agitator.Business.Services.ContractServices
 {
@@ -29,8 +32,41 @@ namespace Agitator.Business.Services.ContractServices
                 { "unitName", searchEntity.UnitName },
                 { "linkman", searchEntity.linkman }
             };
-            CompanyList result = CallAPIHelper.CallAPIInPOST<CompanyList>("/zjyhj/pact/unit/getUnitList", paramsList);
+            CompanyList result = CallAPIHelper.CallAPIInPOST<CompanyList>(APIAddressSetting.API_POST_GETUnitList, paramsList);
+            result.rows.ToList().ForEach(d =>
+            {
+                d.setDate = DateTimeHelper.ConvertIntDateTime(d.setDate).HasValue ? DateTimeHelper.ConvertIntDateTime(d.setDate).Value.ToString("yyyy-MM-dd") : string.Empty;
+            });
             return result;
         }
+
+        /// <summary>
+        /// 获取企业单位详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CompanyDetails GetCompanyDetails(string id)
+        {
+            Dictionary<string, string> paramsList = new Dictionary<string, string>() {
+                { "id", id }
+            };
+            CompanyDetails result = CallAPIHelper.CallAPIInPOST<CompanyDetails>(APIAddressSetting.API_POST_GETUnit, paramsList);
+            return result;
+        }
+
+        /// <summary>
+        /// 删除企业单位记录
+        /// </summary>
+        /// <param name="id">企业单位主键ID</param>
+        /// <returns></returns>
+        public ResultEntity DeleteCompany(string id)
+        {
+            Dictionary<string, string> paramsList = new Dictionary<string, string>() {
+                { "id", id }
+            };
+            ResultEntity entity = CallAPIHelper.CallAPIInPOST<ResultEntity>(APIAddressSetting.API_POST_DELETEUnit, paramsList);
+            return entity;
+        }
+
     }
 }

@@ -532,9 +532,11 @@
     <Content Include="Areas\Contract\Views\web.config" />
     <Content Include="Areas\Contract\Views\Company\Index.cshtml" />
     <Content Include="Areas\Contract\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contract\Views\Company\Details.cshtml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\easyloader.js" />
     <Content Include="Scripts\easyUI\datagrid-detailview.js" />
+    <Content Include="Scripts\easyUI\datagrid-scrollview.js" />
     <Content Include="Scripts\easyUI\EasyUI.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />

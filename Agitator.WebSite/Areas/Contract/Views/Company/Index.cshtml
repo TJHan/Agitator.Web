@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    <title></title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/gray/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -17,44 +17,98 @@
     @Scripts.Render("~/bundles/easyui")
     @Scripts.Render("~/bundles/easyui/datagrid")
     <script>
+        var dataPageSize = 50;
+        var dataPageIndex = 1;
+        
+        function InitGrid(queryData) {
+            $("#tabMain").datagrid({
+                url: '@Url.Action("LoadCompanyList", "Company", new { area="Contract"})',
+                title: '企业单位数据列表',
+                iconCls: 'icon-save',
+                dataType: 'json',
+                rownumbers: true, //是否加行号
+                queryParams: queryData,
+                frozenColumns: [[
+                    { field: 'id', title: 'id', width: 100 },
+                    { field: 'unitId', title: '单位编号', width: 80 },
+                    { field: 'uname', title: '企业名称', width: 300 },
+                    { field: 'setMan', title: '登记人', width: 200 },
+                    { field: 'setDate', title: '登记时间', width: 200 },
+                    {
+                        title: '操作', field: 'Visable', width: 120, formatter: function (value, row, index) {
+                            var btnhtml = '<a href="@Url.Action("Details","Company",new { area = "Contract" })/id=' + row.id + '"> 详情</a>';
+                            btnhtml += '<a href="#" onclick="deleteConfirmInfo(' + row.id + ');">删除</a>';
+                            return btnhtml;
+                        }
+                    }
+                ]],
+                autoRowHeight: false,
+                pageSize: dataPageSize,
+                singleSelect: true,
+                idField: 'id'
+            });
+        }
+      
+        //Remove company
+        function deleteConfirmInfo(unitId) {
+            jQuery.messager.confirm("确定删除吗？", function (event) {
+                if (event) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("Delete","Company",new { area="Contract"})',
+                        data:{ id : unitId},
+                        success: function (data) {
+                            if (data.result == "1") {
+                                jquer.messager.alert('提示：', '删除成功');
+                            } else {
+                                jquer.messager.alert('提示：', '删除失败');
+                            }
+                        }
+                    });
+                } else { }
+            });
+        }
         $(function () {
-        $("#tt").datagrid({
-            title: "企业单位列表",
-            url: '/Contract/Company/LoadCompanyList',
-            method: 'GET',
-            width: '700',
-            iconCls: 'icon-save',
-            dataType: 'json',
-            rownumbers: true, //是否加行号
-            pageSize: 50, //页容量，必须和pageList对应起来，否则会报错            
-            //pageList: [15, 30, 45],//分页中下拉选项的数值
-            columns: [[
-                { field: 'id', title: 'id' },
-                { field: 'uname', title: '企业名称' },
-                { field: 'setMan', title: '法人' }
-            ]],
-            singleSelect: true, //允许选择多行
-            view: 'scrollview',
-            autoRowHeight: false,
-            height:'300'
-        });
-    })
+
+            var queryData = {
+                PageIndex: dataPageIndex,
+                PageSize: dataPageSize,
+                UnitId: $("#txtUnitId").val(),
+                UnitName: $("#txtUnitName").val(),
+                linkman: $("#txtlinkman").val()
+            };
+            InitGrid(queryData);
+
+            $("#btnSearch").click(function () {
+                var queryDataSearch = {
+                    PageIndex: dataPageIndex,
+                    PageSize: dataPageSize,
+                    UnitId: $("#txtUnitId").val(),
+                    UnitName: $("#txtUnitName").val(),
+                    linkman: $("#txtlinkman").val()
+                };
+                InitGrid(queryDataSearch);
+                return false;
+            });
+        })
     </script>
 </head>
 <body>
-    数据
-    @*<table id="tabList" class="easyui-datagrid" style="width:700px;height:300px"
-           title="DataGrid - VirtualScrollView"
-           data-options="view:scrollview,rownumbers:true,singleSelect:true,url:'@Url.Action("LoadCompanyList", "Company", new { area = "Contract" })',autoRowHeight:false,pageSize:50">
-        <thead>
-            <tr>
-                <th field="id" width="80">id</th>
-                <th field="uname" width="100">企业名称</th>
-                <th field="setMan" width="80">法人</th>
-            </tr>
-        </thead>
-    </table>*@
+    <div id="tabSearch" style="padding:3px">
+        <div style="margin-top:5px;">
+            单位编号：
+            <input type="text" id="txtUnitId" />
+            单位名称：
+            <input type="text" id="txtUnitName" />
+            联系人：
+            <input type="text" id="txtlinkman" />
+        </div>
+        <div style="margin-top:5px;">
+            <input type="button" value="查询" id="btnSearch" />
+            <input type="button" value="新建" id="btnCreate"/>
+        </div>
+    </div>
 
-    <table id="tt" class="easyui-datagrid"></table>
+    <table id="tabMain" class="easyui-datagrid" data-options="view:scrollview,pageSize:100" style="height:700px;width:100%;" toolbar="#tabSearch"></table>
 </body>
 </html>
