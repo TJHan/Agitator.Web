@@ -540,6 +540,7 @@
     <Content Include="Areas\Contract\Views\Company\Details.cshtml" />
     <Content Include="Scripts\easyUI\EasyUI.Custom.Main.js" />
     <Content Include="Areas\Contract\Views\Company\Edit.cshtml" />
+    <Content Include="Scripts\Contract\contract.main.js" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\easyloader.js" />
     <Content Include="Scripts\easyUI\datagrid-detailview.js" />

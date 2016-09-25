@@ -99,6 +99,45 @@ namespace Agitator.Business.Controllers.Contract
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Edit(CompanyEdit model)
+        {
+            if (model.id > 0)
+            {
+                //修改
+                Entity.ResultEntity updateResult = _cServices.UpdateCompany(model);
+
+            }
+            else {
+                //新建
+                CompanyAdd entity = new CompanyAdd()
+                {
+                    unitName = model.unitName,
+                    address = model.address,
+                    clientId = model.clientId,
+                    cop = model.cop,
+                    fax = model.fax,
+                    tel1 = model.tel1,
+                    tel2 = model.tel2,
+                    typeId = model.typeId,
+                    gradeSid = model.gradeSid,
+                    linkman = model.linkman,
+                    notused = model.notused,
+                    remark = model.remark,
+                    setDate = model.setDate,
+                    setMan = model.setMan
+                };
+
+                ResultAddCompany addResult = _cServices.AddCompany(entity);
+                if (addResult.result == "1")
+                {
+                    model.id = addResult.id;
+                    model.unitId = addResult.unitId;
+                }
+            }
+            return View(model);
+        }
+
         /// <summary>
         /// 修改企业单位状态
         /// </summary>

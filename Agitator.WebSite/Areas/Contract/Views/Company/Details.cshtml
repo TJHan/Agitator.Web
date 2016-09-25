@@ -1,6 +1,32 @@
 ﻿@using Agitator.Business.Entity.ContractEntity;
 @model CompanyDetails
-
+<script>
+    $(function () {
+        $("#btnDelete").click(function () {
+            deleteConfirmInfo();
+        });
+        //Remove company
+        function deleteConfirmInfo() {
+            jQuery.messager.confirm("提示：", "确定删除吗？", function (event) {
+                if (event) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("Delete","Company",new { area="Contract"})',
+                        data: { id: @Model.id },
+                        success: function (data) {
+                            if (data.result == "1") {
+                                jQuery.messager.alert('提示：', '删除成功');
+                                window.history.back();
+                            } else {
+                                jQuery.messager.alert('提示：', data.errmsg==null?"服务器异常，请稍后再试":data.errmsg);
+                            }
+                        }
+                    });
+                } else { }
+            });
+        }
+    })
+</script>
 <div class="easyui-tabs" style="width:100%;height:700px;">
     <div title="单位详情" style="padding:10px;">
         <div class="title">
@@ -62,10 +88,10 @@
             <label>备注: </label>
             <label>@Model.remark</label>
         </div>
-        <a id="btnEdit" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">修改</a>
+        <a id="btnEdit" href="@Url.Action("Edit","Company",new { area = "Contract",id = Model.id })" class="easyui-linkbutton easyui-linkbutton-cstype">修改</a>
         <a id="btnDelete" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">删除</a>
-        <a id="btnState" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">启用</a>
-        <a id="btnBack" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">返回</a>
+        @*<a id="btnState" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">启用</a>*@
+        <a id="btnBacktoindex" href="@Url.Action("Index","Company",new { area="Contract"})" class="easyui-linkbutton easyui-linkbutton-cstype">返回</a>
         
     </div>
     <div title="站点同步" closable="false" style="padding:10px;">
