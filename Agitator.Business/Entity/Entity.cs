@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Agitator.Business.Entity
 {
-    public class Entity
+    public abstract class Entity
     {
     }
 }

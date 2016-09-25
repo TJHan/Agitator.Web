@@ -13,8 +13,6 @@ namespace Agitator.Business.Entity.CommonEntity
     public class CompanyTypeItem
     {
         public int id { get; set; }
-        public int typeId { get; set; }
-        public string type { get; set; }
-        public string typeBeWrite { get; set; }
+        public string caption { get; set; }
     }
 }

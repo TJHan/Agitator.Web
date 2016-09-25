@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Agitator.Business.Entity.ContractEntity
 {
     /// <summary>
-    /// 企业单位详情类
+    /// 修改企业单位实体类【也做接口参数使用，属性需匹配接口参数】
     /// </summary>
-    public class CompanyDetails 
+    public class CompanyEdit: Entity
     {
         public int id { get; set; }
         /// <summary>
@@ -54,6 +54,5 @@ namespace Agitator.Business.Entity.ContractEntity
         public string setMan { get; set; }
         public string setDate { get; set; }
         public string remark { get; set; }
-
     }
 }

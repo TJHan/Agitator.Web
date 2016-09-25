@@ -7,15 +7,10 @@ using System.Threading.Tasks;
 namespace Agitator.Business.Entity.ContractEntity
 {
     /// <summary>
-    /// 企业单位详情类
+    /// 新建企业单位提交数据实体类
     /// </summary>
-    public class CompanyDetails 
+    public class CompanyAdd : Entity
     {
-        public int id { get; set; }
-        /// <summary>
-        /// 单位编号
-        /// </summary>
-        public string unitId { get; set; }
         /// <summary>
         /// 企业名称
         /// </summary>
@@ -54,6 +49,5 @@ namespace Agitator.Business.Entity.ContractEntity
         public string setMan { get; set; }
         public string setDate { get; set; }
         public string remark { get; set; }
-
     }
 }

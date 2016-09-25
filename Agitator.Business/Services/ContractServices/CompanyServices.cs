@@ -33,10 +33,13 @@ namespace Agitator.Business.Services.ContractServices
                 { "linkman", searchEntity.linkman }
             };
             CompanyList result = CallAPIHelper.CallAPIInPOST<CompanyList>(APIAddressSetting.API_POST_GETUnitList, paramsList);
-            result.rows.ToList().ForEach(d =>
+            if (result != null && result.rows != null)
             {
-                d.setDate = DateTimeHelper.ConvertIntDateTime(d.setDate).HasValue ? DateTimeHelper.ConvertIntDateTime(d.setDate).Value.ToString("yyyy-MM-dd") : string.Empty;
-            });
+                result.rows.ToList().ForEach(d =>
+                {
+                    d.setDate = DateTimeHelper.ConvertIntToDateTimeString(d.setDate);
+                });
+            }
             return result;
         }
 
@@ -51,6 +54,19 @@ namespace Agitator.Business.Services.ContractServices
                 { "id", id }
             };
             CompanyDetails result = CallAPIHelper.CallAPIInPOST<CompanyDetails>(APIAddressSetting.API_POST_GETUnit, paramsList);
+            if (result != null)
+                result.setDate = DateTimeHelper.ConvertIntToDateTimeString(result.setDate);
+            return result;
+        }
+
+        /// <summary>
+        /// 创建新企业单位
+        /// </summary>
+        /// <param name="entity">接口参数实体对象</param>
+        /// <returns></returns>
+        public ResultAddCompany AddCompany(CompanyAdd entity)
+        {
+            ResultAddCompany result = CallAPIHelper.CallAPIInPOST<ResultAddCompany>(APIAddressSetting.API_POST_ADDUnit, entity);
             return result;
         }
 
@@ -66,6 +82,33 @@ namespace Agitator.Business.Services.ContractServices
             };
             ResultEntity entity = CallAPIHelper.CallAPIInPOST<ResultEntity>(APIAddressSetting.API_POST_DELETEUnit, paramsList);
             return entity;
+        }
+
+        /// <summary>
+        /// 修改企业单位记录数据
+        /// </summary>
+        /// <param name="entity">接口参数实体对象</param>
+        /// <returns></returns>
+        public ResultEntity UpdateCompany(CompanyEdit entity)
+        {
+            ResultEntity result = CallAPIHelper.CallAPIInPOST<ResultEntity>(APIAddressSetting.API_POST_UPDATEUnit, entity);
+            return result;
+        }
+
+        /// <summary>
+        /// 修改企业单位停用/启用状态
+        /// </summary>
+        /// <param name="id">企业主键ID</param>
+        /// <param name="enable">状态, 0:停用，1：启用</param>
+        /// <returns></returns>
+        public ResultEntity SetCompanyState(string id, string enable)
+        {
+            Dictionary<string, string> paramsList = new Dictionary<string, string>() {
+                { "id", id },
+                { "enable", enable }
+            };
+            ResultEntity result = CallAPIHelper.CallAPIInPOST<ResultEntity>(APIAddressSetting.API_POST_SETUnitState, paramsList);
+            return result;
         }
 
     }

@@ -11,6 +11,7 @@
     <title></title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/gray/css")
+    @Styles.Render("~/Content/themes/easyui/custom")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @*引用easyui脚本*@
@@ -19,7 +20,7 @@
     <script>
         var dataPageSize = 50;
         var dataPageIndex = 1;
-        
+
         function InitGrid(queryData) {
             $("#tabMain").datagrid({
                 url: '@Url.Action("LoadCompanyList", "Company", new { area="Contract"})',
@@ -27,31 +28,50 @@
                 iconCls: 'icon-save',
                 dataType: 'json',
                 rownumbers: true, //是否加行号
-                queryParams: queryData,
-                frozenColumns: [[
-                    { field: 'id', title: 'id', width: 100 },
-                    { field: 'unitId', title: '单位编号', width: 80 },
-                    { field: 'uname', title: '企业名称', width: 300 },
-                    { field: 'setMan', title: '登记人', width: 200 },
-                    { field: 'setDate', title: '登记时间', width: 200 },
+                queryParams: queryData,                
+                columns: [[
                     {
-                        title: '操作', field: 'Visable', width: 120, formatter: function (value, row, index) {
+                        title: '操作', field: 'Visable', width: 140, formatter: function (value, row, index) {
                             var btnhtml = '<a href="@Url.Action("Details","Company",new { area = "Contract" })/id=' + row.id + '"> 详情</a>';
-                            btnhtml += '<a href="#" onclick="deleteConfirmInfo(' + row.id + ');">删除</a>';
+                            btnhtml += ' | <a href="@Url.Action("Edit","Company",new { area = "Contract" })/id=' + row.id + '">修改</a>';
+                            btnhtml += ' | <a href="#" onclick="deleteConfirmInfo(' + row.id + ');">删除</a>';
+                            var stateBtnValue = "";
+                            if (row.notused == "0")
+                            {
+                                stateBtnValue = "启用";
+                            } else {
+                                stateBtnValue = "停用";
+                            }
+                            btnhtml += ' | <a href="#" onclick="SetCompanyState(' + row.id + ','+row.notused+');" id="btnChangeState_'+row.id+'">' + stateBtnValue + '</a>';
                             return btnhtml;
                         }
-                    }
+                    },
+                    { field: 'id', title: 'id', width: 100 },
+                    { field: 'unitId', title: '单位编号', width: 80 },
+                    { field: 'unitName', title: '企业名称', width: 300 },
+                    { field: 'tel1', title: '电话1', width: 100 },
+                    { field: 'tel2', title: '电话2', width: 100 },
+                    { field: 'fax', title: '传真', width: 100 },
+                    { field: 'address', title: '地址', width: 100 },
+                    { field: 'linkman', title: '联系人', width: 100 },
+                    { field: 'cop', title: '法人', width: 100 },
+                    { field: 'notused', title: '状态', width: 100,visable:false },
+                    { field: 'setMan', title: '登记人', width: 100 },
+                    { field: 'setDate', title: '登记时间', width: 120 },
+                    { field: 'remark', title: '备注', width: 200 }
+
                 ]],
+
                 autoRowHeight: false,
                 pageSize: dataPageSize,
                 singleSelect: true,
                 idField: 'id'
             });
         }
-      
+
         //Remove company
         function deleteConfirmInfo(unitId) {
-            jQuery.messager.confirm("确定删除吗？", function (event) {
+            jQuery.messager.confirm("提示：","确定删除吗？", function (event) {
                 if (event) {
                     $.ajax({
                         type: 'POST',
@@ -59,15 +79,42 @@
                         data:{ id : unitId},
                         success: function (data) {
                             if (data.result == "1") {
-                                jquer.messager.alert('提示：', '删除成功');
+                                jQuery.messager.alert('提示：', '删除成功');
+                                var queryData = {
+                                    PageIndex: dataPageIndex,
+                                    PageSize: dataPageSize,
+                                    UnitId: $("#txtUnitId").val(),
+                                    UnitName: $("#txtUnitName").val(),
+                                    linkman: $("#txtlinkman").val()
+                                };
+                                InitGrid();
                             } else {
-                                jquer.messager.alert('提示：', '删除失败');
+                                jQuery.messager.alert('提示：', '删除失败');
                             }
                         }
                     });
                 } else { }
             });
         }
+
+        function SetCompanyState(unitId,state)
+        {           
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("UpdateCompanyState", "Company",new { area = "Contract"})',
+                data: { id: unitId, state: state },
+                success: function (data) {
+                    if (data.result == "1")
+                    {
+                        var stateText = state == 1 ? "启用" : "停用";
+                        $("#btnChangeState_" + unitId).html(stateText);
+                    } else {
+                        jQuery.messager.alert("提示：", data.errmsg);
+                    }
+                }
+            });
+        }
+
         $(function () {
 
             var queryData = {
@@ -93,7 +140,7 @@
         })
     </script>
 </head>
-<body>
+<body style="padding-top:0px;">
     <div id="tabSearch" style="padding:3px">
         <div style="margin-top:5px;">
             单位编号：
@@ -104,8 +151,8 @@
             <input type="text" id="txtlinkman" />
         </div>
         <div style="margin-top:5px;">
-            <input type="button" value="查询" id="btnSearch" />
-            <input type="button" value="新建" id="btnCreate"/>
+            <a id="btnSearch" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">查询</a>
+            <a id="btnSearch" href="@Url.Action("Edit","Company",new { area = "Contract"})" class="easyui-linkbutton easyui-linkbutton-cstype">新建</a>            
         </div>
     </div>
 

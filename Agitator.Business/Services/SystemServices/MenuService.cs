@@ -25,7 +25,7 @@ namespace Agitator.Business.Services
                 Dictionary<string, string> dicList = new Dictionary<string, string>(){
                     {"loginName",userName}
                 };
-                result = CallAPIHelper.CallAPIInPOST<Menu[]>("/zjyhj/sysPower/getSysPowerByLoginName", dicList);
+                result = CallAPIHelper.CallAPIInPOST<Menu[]>(APIAddressSetting.API_POST_GETSysPowerByLoginName, dicList);
                 if (result != null)
                 {
                     SessionHelper.SetSession(SessionKeys.LoginUserMenu, result);

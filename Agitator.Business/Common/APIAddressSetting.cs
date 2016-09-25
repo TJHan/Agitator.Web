@@ -9,6 +9,7 @@ namespace Agitator.Business.Common
 {
     public class APIAddressSetting
     {
+        #region 操作企业单位API
         /// <summary>
         /// 根据客户单位ID获取单位相信信息接口
         /// </summary>
@@ -20,8 +21,49 @@ namespace Agitator.Business.Common
         public static readonly string API_POST_GETUnitList = ConfigurationManager.AppSettings["API_POST_GETUnitList"];
 
         /// <summary>
+        /// 新建企业单位接口
+        /// </summary>
+        public static readonly string API_POST_ADDUnit = ConfigurationManager.AppSettings["API_POST_ADDUnit"];        
+
+        /// <summary>
         /// 根据企业单位ID删除企业单位数据接口
         /// </summary>
         public static readonly string API_POST_DELETEUnit = ConfigurationManager.AppSettings["API_POST_DELETEUnit"];
+
+        /// <summary>
+        /// 根据企业单位ID删除企业单位数据接口
+        /// </summary>
+        public static readonly string API_POST_UPDATEUnit = ConfigurationManager.AppSettings["API_POST_UPDATEUnit"];
+
+        /// <summary>
+        /// 停用/启用企业单位API
+        /// </summary>
+        public static readonly string API_POST_SETUnitState = ConfigurationManager.AppSettings["API_POST_SETUnitState"];
+        #endregion
+
+        #region 公共操作API
+        /// <summary>
+        /// 获取企业单位类型接口
+        /// </summary>
+        public static readonly string API_GET_CompanyType = ConfigurationManager.AppSettings["API_GET_CompanyType"];
+
+        /// <summary>
+        /// 获取企业单位等级接口
+        /// </summary>
+        public static readonly string API_GET_CompanyGrade = ConfigurationManager.AppSettings["API_GET_CompanyGrade"];
+        #endregion
+
+        #region 登录用户及权限API
+        /// <summary>
+        /// 用户登录接口
+        /// </summary>
+        public static readonly string API_POST_Login = ConfigurationManager.AppSettings["API_POST_Login"];
+
+        /// <summary>
+        /// 获取用户权限接口
+        /// </summary>
+        public static readonly string API_POST_GETSysPowerByLoginName = ConfigurationManager.AppSettings["API_POST_GETSysPowerByLoginName"];
+        #endregion
+
     }
 }

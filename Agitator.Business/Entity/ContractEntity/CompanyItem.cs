@@ -27,7 +27,7 @@ namespace Agitator.Business.Entity.ContractEntity
         /// <summary>
         /// 
         /// </summary>
-        public string projectId { get; set; }
+        public string unitId { get; set; }
         public string address { get; set; }
         public string tel1 { get; set; }
         public string tel2 { get; set; }
@@ -41,6 +41,6 @@ namespace Agitator.Business.Entity.ContractEntity
         public string setDate { get; set; }
         public string setMan { get; set; }
         public string remark { get; set; }
-        public string uname { get; set; }
+        public string unitName { get; set; }
     }
 }

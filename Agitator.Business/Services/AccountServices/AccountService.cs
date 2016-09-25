@@ -34,7 +34,7 @@ namespace Agitator.Business.Services
             };
             //TODO:
             //这里需要等待接口方修改接口返回数据，然后本地修改LoginUserInfo以映射接口返回值
-            LoginUserInfo loginUser = CallAPIHelper.CallAPIInPOST<LoginUserInfo>("/zjyhj/user/auth", dictList);
+            LoginUserInfo loginUser = CallAPIHelper.CallAPIInPOST<LoginUserInfo>(APIAddressSetting.API_POST_Login, dictList);
             if (loginUser != null && loginUser.result == 1 && loginUser.user != null)
             {
                 //登录成功，高速缓存用户信息到服务器中

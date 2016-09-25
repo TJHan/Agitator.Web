@@ -68,8 +68,11 @@
     <Compile Include="Controllers\Contract\CompanyController.cs" />
     <Compile Include="Entity\CommonEntity\CompanyGrade.cs" />
     <Compile Include="Entity\CommonEntity\CompanyType.cs" />
+    <Compile Include="Entity\ContractEntity\CompanyAdd.cs" />
     <Compile Include="Entity\ContractEntity\CompanyDetails.cs" />
+    <Compile Include="Entity\ContractEntity\CompanyEdit.cs" />
     <Compile Include="Entity\ContractEntity\CompanyItem.cs" />
+    <Compile Include="Entity\ContractEntity\ResultAddCompany.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\ResultEntity.cs" />
     <Compile Include="Entity\SystemEntity\Menu.cs" />
@@ -78,6 +81,7 @@
     <Compile Include="Helper\CommonHtmlHelper.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="HttpHandler\CallAPIHelper.cs" />
+    <Compile Include="Models\Contract\EditCompanyModel.cs" />
     <Compile Include="Models\Home\LoginModel.cs" />
     <Compile Include="Models\SystemModels\MenuModel.cs" />
     <Compile Include="ParameterEntity\ParamsCompanySearch.cs" />

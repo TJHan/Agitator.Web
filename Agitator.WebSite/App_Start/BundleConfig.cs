@@ -34,6 +34,9 @@ namespace Agitator.WebSite
             bundles.Add(new ScriptBundle("~/bundles/easyui/custom").Include(
                 "~/Scripts/easyUI/EasyUI.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/easyui/customMain").Include(
+                "~/Scripts/easyUI/EasyUI.Custom.Main.js"));
+
             //数据列表JS
             bundles.Add(new ScriptBundle("~/bundles/easyui/datagrid").Include("~/Scripts/easyUI/datagrid-scrollview.js"));
 
@@ -43,6 +46,8 @@ namespace Agitator.WebSite
             bundles.Add(new StyleBundle("~/Content/themes/metro/css").IncludeDirectory("~/Content/themes/metro", "*.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/bootstrap/css").IncludeDirectory("~/Content/themes/bootstrap", "*.css"));
+
+            bundles.Add(new StyleBundle("~/Content/themes/easyui/custom").Include("~/Content/themes/easyUI_CustomMain.css"));
 
 
         }

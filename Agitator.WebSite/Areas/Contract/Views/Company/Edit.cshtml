@@ -1,0 +1,75 @@
+﻿@using Agitator.Business.Entity.ContractEntity;
+@model CompanyEdit
+
+@using (Html.BeginForm())
+{
+    <div class="easyui-tabs" style="width:100%;height:700px;">
+        <div title="单位详情" style="padding:10px;">
+            <div class="ftitle">
+                修改单位信息
+            </div>
+            <div class="fitem">
+                <label>单位编号:</label>
+                <label>@Model.unitId</label>
+            </div>
+            <div class="fitem">
+                <label>单位名称:</label>
+                @Html.TextBoxFor(d => d.unitName, new { @class = "easyui-validatebox", required=true })
+            </div>
+            <div class="fitem">
+                <label>单位简称:</label>
+               
+            </div>
+            <div class="fitem">
+                <label>地址:</label>
+                @Html.TextBoxFor(d => d.address, new { @class = "easyui-validatebox" })
+            </div>
+            <div class="fitem">
+                <label>业务类型:</label>
+                @Html.DropDownListFor(d=>d.typeId,ViewData["CompanyTypeList"] as List<SelectListItem>)
+            </div>
+            <div class="fitem">
+                <label>法人代表: </label>
+                @Html.TextBoxFor(d => d.cop, new { @class = "easyui-validatebox" })
+            </div>
+            <div class="fitem">
+                <label>联系人: </label>
+                @Html.TextBoxFor(d => d.linkman, new { @class = "easyui-validatebox" })
+            </div>
+            <div class="fitem">
+                <label>联系电话1: </label>
+                @Html.TextBoxFor(d => d.tel1, new { @class = "easyui-validatebox" })
+            </div>
+            <div class="fitem">
+                <label>联系电话2: </label>
+                @Html.TextBoxFor(d => d.tel2, new { @class = "easyui-validatebox" })
+            </div>
+            <div class="fitem">
+                <label>传真号码: </label>
+                @Html.TextBoxFor(d => d.fax, new { @class = "easyui-validatebox" })
+            </div>
+            <div class="fitem">
+                <label>等级: </label>
+                @Html.DropDownListFor(d => d.gradeSid,ViewData["CompanyGradeList"] as List<SelectListItem>)
+            </div>
+            <div class="fitem">
+                <label>登记人: </label>
+                @Html.TextBoxFor(d => d.setMan, new { @class = "easyui-validatebox" })
+            </div>
+            <div class="fitem">
+                <label>登记时间: </label>
+                @Html.TextBoxFor(d => d.setDate,new { @class = "easyui-validatebox" })
+            </div>
+            <div class="fitem">
+                <label>备注: </label>
+                @Html.TextAreaFor(d => d.remark, new { @class = "easyui-validatebox",style="height:100px;" })
+            </div>
+            <div class="fitem">
+                <input type="submit" class="easyui-linkbutton-cstype" value="保存" />                
+                <input type="button" class="easyui-linkbutton-cstype" value="返回" id="btnBack" />
+            </div>
+        </div>
+       
+    </div>
+}
+   

@@ -4,16 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    <title></title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/gray/css")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
-        @*引用easyui脚本*@
-        @Scripts.Render("~/bundles/easyui")
+    @Styles.Render("~/Content/themes/easyui/custom")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @*引用easyui脚本*@
+    @Scripts.Render("~/bundles/easyui")
+    @Scripts.Render("~/bundles/easyui/customMain")
 </head>
-<body>
-    我是头
+<body style="padding-top:0px;">
     @RenderBody()
     @RenderSection("scripts", required: false)
 </body>

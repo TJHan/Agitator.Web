@@ -9,9 +9,10 @@
 <html>
 <head>
     <title>系统登录</title>
-    @Scripts.Render("~/bundles/jquery");
+    @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/themes/bootstrap/css")
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/easyui/custom")
     <style type="text/css">
         body {
             letter-spacing: 1px;
@@ -91,14 +92,11 @@
     </script>
 </head>
 <body>
-
     <div>
         <div class="define-head" style="height: 67px;">
             <div class="define-logo">
-                <div id="LoginTopLine">YmNets.cnblogs.com</div>
-                <div id="LoginBotoomLine">MVC4+EF5.0+EasyUI</div>
+                <div id="LoginTopLine">商砼管理系统</div>
             </div>
-
         </div>
     </div>
     <div style="margin: 0 auto; margin-top: 100px; width: 800px;">
@@ -156,7 +154,9 @@
                                                 <div id="Loading" style="display: none" class='panel-loading'><font color='#000'>加载中...</font></div>
                                             </td>
                                             <td style="width: 100px;">
-                                                <a id="LoginSys" href="javascript:void(0)" class="easyui-linkbutton l-btn"><span class="l-btn-left"><span class="l-btn-text icon-ok" style="padding-left: 20px;">登录</span></span></a>
+                                                <a id="LoginSys" href="javascript:void(0)" class="easyui-linkbutton l-btn easyui-linkbutton-cstype">
+                                                <span class="l-btn-left">
+                                                    <span class="l-btn-text">登录</span></span></a>
                                             </td>
                                         </tr>
 
@@ -174,7 +174,7 @@
 
     </div>
     <div style="background:#f1f1f1; height:40px; width:100%; text-align:center; line-height:40px;border-top:1px #ccc solid;bottom:0; position:absolute">
-        Copyright ymnet2010-2013
+        Copyright 2010-2016
     </div>
 </body>
 </html>

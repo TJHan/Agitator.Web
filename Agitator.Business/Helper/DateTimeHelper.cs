@@ -26,6 +26,17 @@ namespace Agitator.Business.Helper
         }
 
         /// <summary>
+        /// 将Unix时间戳转换为DateTime类型时间
+        /// </summary>
+        /// <param name="d">double型数字</param>
+        /// <param name="dateFormat">日期格式化类型</param>
+        /// <returns>格式化成字符串的日期</returns>
+        public static string ConvertIntToDateTimeString(string d, string dateFormat = "yyyy-MM-dd")
+        {
+            return ConvertIntDateTime(d).HasValue ? DateTimeHelper.ConvertIntDateTime(d).Value.ToString(dateFormat) : string.Empty;
+        }
+
+        /// <summary>
         /// 将c# DateTime时间格式转换为Unix时间戳格式,返回格式：1468482273277
         /// </summary>
         /// <param name="time">时间</param>
