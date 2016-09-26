@@ -1,75 +1,160 @@
 ﻿@using Agitator.Business.Entity.ContractEntity;
 @model CompanyEdit
 
-@using (Html.BeginForm())
+<style>
+    .form-tab {
+        border: 1px solid #D4D4D4;
+        padding: 3px;
+        width: 100%;
+        margin: 3px 3px 15px 3px;
+    }
+
+        .form-tab td {
+            padding: 3px;
+            border: 1px solid #D4D4D4;
+        }
+
+            .form-tab td:first-child {
+                width: 120px;
+                text-align: right;
+                background-color: #e5e4e4;
+            }
+</style>
+<script>
+    function FormSubmit()
+    {
+        $("#FormCompany").form('submit', {
+            onSubmit: function () {
+                return $(this).form('enableValidation').form('validate');
+            }
+        });
+    }
+</script>
+@using (Html.BeginForm("Edit", "Company", FormMethod.Post, new { id="FormCompany",area = "Contract"}))
 {
+    @Html.HiddenFor(d => d.id)
+    @Html.HiddenFor(d => d.unitId)
     <div class="easyui-tabs" style="width:100%;height:700px;">
         <div title="单位详情" style="padding:10px;">
-            <div class="ftitle">
-                修改单位信息
-            </div>
-            <div class="fitem">
-                <label>单位编号:</label>
-                <label>@Model.unitId</label>
-            </div>
-            <div class="fitem">
-                <label>单位名称:</label>
-                @Html.TextBoxFor(d => d.unitName, new { @class = "easyui-validatebox", required=true })
-            </div>
-            <div class="fitem">
-                <label>单位简称:</label>
-               
-            </div>
-            <div class="fitem">
-                <label>地址:</label>
-                @Html.TextBoxFor(d => d.address, new { @class = "easyui-validatebox" })
-            </div>
-            <div class="fitem">
-                <label>业务类型:</label>
-                @Html.DropDownListFor(d=>d.typeId,ViewData["CompanyTypeList"] as List<SelectListItem>)
-            </div>
-            <div class="fitem">
-                <label>法人代表: </label>
-                @Html.TextBoxFor(d => d.cop, new { @class = "easyui-validatebox" })
-            </div>
-            <div class="fitem">
-                <label>联系人: </label>
-                @Html.TextBoxFor(d => d.linkman, new { @class = "easyui-validatebox" })
-            </div>
-            <div class="fitem">
-                <label>联系电话1: </label>
-                @Html.TextBoxFor(d => d.tel1, new { @class = "easyui-validatebox" })
-            </div>
-            <div class="fitem">
-                <label>联系电话2: </label>
-                @Html.TextBoxFor(d => d.tel2, new { @class = "easyui-validatebox" })
-            </div>
-            <div class="fitem">
-                <label>传真号码: </label>
-                @Html.TextBoxFor(d => d.fax, new { @class = "easyui-validatebox" })
-            </div>
-            <div class="fitem">
-                <label>等级: </label>
-                @Html.DropDownListFor(d => d.gradeSid,ViewData["CompanyGradeList"] as List<SelectListItem>)
-            </div>
-            <div class="fitem">
-                <label>登记人: </label>
-                @Html.TextBoxFor(d => d.setMan, new { @class = "easyui-validatebox" })
-            </div>
-            <div class="fitem">
-                <label>登记时间: </label>
-                @Html.TextBoxFor(d => d.setDate,new { @class = "easyui-validatebox" })
-            </div>
-            <div class="fitem">
-                <label>备注: </label>
-                @Html.TextAreaFor(d => d.remark, new { @class = "easyui-validatebox",style="height:100px;" })
-            </div>
-            <div class="fitem">
-                <input type="submit" class="easyui-linkbutton-cstype" value="保存" />                
-                <input type="button" class="easyui-linkbutton-cstype" value="返回" id="btnBack" />
+            <div class="easyui-panel" style="width:600px;padding:10px 10px;" title="编辑单位信息">
+                <table class="form-tab">
+                    <tr>
+                        <td>
+                            <label>单位编号:</label>
+                        </td>
+                        <td>
+                            <label>@Model.unitId</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>单位名称:</label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(d => d.unitName, new { @class = "easyui-textbox easyui-validatebox", style = "width:80%;", required = true })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>单位简称:</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>地址:</label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(d => d.address, new { @class = "easyui-textbox", style = "width:100%;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>业务类型:</label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(d => d.typeId, ViewData["CompanyTypeList"] as List<SelectListItem>)
+                            【指定该单位与本公司的业务关系】
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>法人代表: </label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(d => d.cop, new { @class = "easyui-textbox" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>联系人: </label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(d => d.linkman, new { @class = "easyui-textbox" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>联系电话1: </label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(d => d.tel1, new { @class = "easyui-textbox" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>联系电话2: </label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(d => d.tel2, new { @class = "easyui-textbox" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>传真号码: </label>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(d => d.fax, new { @class = "easyui-textbox" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>等级: </label>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(d => d.gradeSid, ViewData["CompanyGradeList"] as List<SelectListItem>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>登记人: </label>
+                        </td>
+                        <td>
+                            @Model.setMan
+                            @Html.HiddenFor(d => d.setMan)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>登记时间: </label>
+                        </td>
+                        <td>
+                            @Model.setDate
+                            @Html.HiddenFor(d => d.setDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>备注: </label>
+                        </td>
+                        <td>
+                            <input class="easyui-textbox" data-options="multiline:true" value="@Model.remark" style="width:100%;height:100px">
+                        </td>
+                    </tr>
+                </table>
+                <a id="btnEdit" href="#" onclick="FormSubmit();" class="easyui-linkbutton easyui-linkbutton-cstype">保存</a>
+                <a id="btnGoBack" href="@Url.Action("Index", "Company", new { area="Contract"})" class="easyui-linkbutton easyui-linkbutton-cstype">返回</a>
             </div>
         </div>
-       
     </div>
 }
-   

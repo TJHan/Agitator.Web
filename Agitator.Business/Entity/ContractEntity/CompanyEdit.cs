@@ -31,18 +31,21 @@ namespace Agitator.Business.Entity.ContractEntity
         /// </summary>
         public string linkman { get; set; }
         public string fax { get; set; }
-        /// <summary>
-        /// 单位法人
-        /// </summary>
-        public string cop { get; set; }
+        public string remark { get; set; }
         /// <summary>
         /// 单位类型
         /// </summary>
         public string typeId { get; set; }
         /// <summary>
+        /// 单位法人
+        /// </summary>
+        public string cop { get; set; }
+        /// <summary>
         /// 客户代码
         /// </summary>
         public string clientId { get; set; }
+        public string setMan { get; set; }
+        public string setDate { get; set; }
         /// <summary>
         /// 客户等级
         /// </summary>
@@ -51,8 +54,7 @@ namespace Agitator.Business.Entity.ContractEntity
         /// 是否启用
         /// </summary>
         public string notused { get; set; }
-        public string setMan { get; set; }
-        public string setDate { get; set; }
-        public string remark { get; set; }
+
+        public string createUserId { get; set; }
     }
 }

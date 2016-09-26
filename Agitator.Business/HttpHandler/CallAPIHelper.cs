@@ -60,7 +60,7 @@ namespace Agitator.Business.HttpHandler
                 try
                 {
                     client.BaseAddress = BaseAPIAddress;
-                    client.Encoding = Encoding.UTF8;
+                    //client.Encoding = Encoding.UTF8;
                     NameValueCollection postData = new NameValueCollection();
                     foreach (var item in nameValueCollection)
                     {

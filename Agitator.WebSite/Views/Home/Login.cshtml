@@ -10,8 +10,8 @@
 <head>
     <title>系统登录</title>
     @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/themes/bootstrap/css")
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/bootstrap/css")    
     @Styles.Render("~/Content/themes/easyui/custom")
     <style type="text/css">
         body {
@@ -117,7 +117,7 @@
                                     用户名：
                                 </td>
                                 <td>
-                                    @Html.EditorFor(d => d.UserName)
+                                    @Html.TextBoxFor(d => d.UserName, new { @class = "easyui-textbox" })
                                 </td>
                             </tr>
                             <tr>
@@ -125,7 +125,7 @@
                                     密 码：
                                 </td>
                                 <td>
-                                    @Html.EditorFor(d => d.Password, new { type = "password" })
+                                    @Html.TextBoxFor(d => d.Password, new { @class = "easyui-textbox", type = "password" })
                                 </td>
                             </tr>
                             @*<tr>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/themes/gray/css")
+    @Styles.Render("~/Content/themes/bootstrap/css")
     @Styles.Render("~/Content/themes/easyui/custom")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -28,21 +28,20 @@
                 iconCls: 'icon-save',
                 dataType: 'json',
                 rownumbers: true, //是否加行号
-                queryParams: queryData,                
+                queryParams: queryData,
                 columns: [[
                     {
                         title: '操作', field: 'Visable', width: 140, formatter: function (value, row, index) {
-                            var btnhtml = '<a href="@Url.Action("Details","Company",new { area = "Contract" })/id=' + row.id + '"> 详情</a>';
-                            btnhtml += ' | <a href="@Url.Action("Edit","Company",new { area = "Contract" })/id=' + row.id + '">修改</a>';
+                            var btnhtml = '<a href="@Url.Action("Details","Company",new { area = "Contract" })/' + row.id + '"> 详情</a>';
+                            btnhtml += ' | <a href="@Url.Action("Edit","Company",new { area = "Contract" })/' + row.id + '">修改</a>';
                             btnhtml += ' | <a href="#" onclick="deleteConfirmInfo(' + row.id + ');">删除</a>';
                             var stateBtnValue = "";
-                            if (row.notused == "0")
-                            {
+                            if (row.notused == "0") {
                                 stateBtnValue = "启用";
                             } else {
                                 stateBtnValue = "停用";
                             }
-                            btnhtml += ' | <a href="#" onclick="SetCompanyState(' + row.id + ','+row.notused+');" id="btnChangeState_'+row.id+'">' + stateBtnValue + '</a>';
+                            btnhtml += ' | <a href="#" onclick="SetCompanyState(this);" unit_key="' + row.id + '" unit_state="' + row.notused + '" id="btnChangeState_' + row.id + '">' + stateBtnValue + '</a>';
                             return btnhtml;
                         }
                     },
@@ -55,7 +54,11 @@
                     { field: 'address', title: '地址', width: 100 },
                     { field: 'linkman', title: '联系人', width: 100 },
                     { field: 'cop', title: '法人', width: 100 },
-                    { field: 'notused', title: '状态', width: 100,visable:false },
+                    {
+                        field: 'State', title: '状态', width: 100, formatter: function (value,row,index) {
+                            return "<span id='unitState_"+row.id+"'>"+row.State+"</span>";
+                        }
+                    },
                     { field: 'setMan', title: '登记人', width: 100 },
                     { field: 'setDate', title: '登记时间', width: 120 },
                     { field: 'remark', title: '备注', width: 200 }
@@ -71,12 +74,12 @@
 
         //Remove company
         function deleteConfirmInfo(unitId) {
-            jQuery.messager.confirm("提示：","确定删除吗？", function (event) {
+            jQuery.messager.confirm("提示：", "确定删除吗？", function (event) {
                 if (event) {
                     $.ajax({
                         type: 'POST',
                         url: '@Url.Action("Delete","Company",new { area="Contract"})',
-                        data:{ id : unitId},
+                        data: { id: unitId },
                         success: function (data) {
                             if (data.result == "1") {
                                 jQuery.messager.alert('提示：', '删除成功');
@@ -97,17 +100,20 @@
             });
         }
 
-        function SetCompanyState(unitId,state)
-        {           
+        function SetCompanyState(obj) {
+            var unitId = $(obj).attr("unit_key");
+            var state = $(obj).attr("unit_state");
+
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("UpdateCompanyState", "Company",new { area = "Contract"})',
                 data: { id: unitId, state: state },
                 success: function (data) {
-                    if (data.result == "1")
-                    {
+                    if (data.result == "1") {
                         var stateText = state == 1 ? "启用" : "停用";
-                        $("#btnChangeState_" + unitId).html(stateText);
+                        $(obj).html(stateText);
+                        $(obj).attr("unit_state", state == 1 ? 0 : 1);
+                        $("#unitState_" + unitId).html(state == 1 ? "已停用" : "已启用");
                     } else {
                         jQuery.messager.alert("提示：", data.errmsg);
                     }
@@ -144,15 +150,15 @@
     <div id="tabSearch" style="padding:3px">
         <div style="margin-top:5px;">
             单位编号：
-            <input type="text" id="txtUnitId" />
+            <input type="text" id="txtUnitId" class="easyui-textbox" />
             单位名称：
-            <input type="text" id="txtUnitName" />
+            <input type="text" id="txtUnitName" class="easyui-textbox" />
             联系人：
-            <input type="text" id="txtlinkman" />
+            <input type="text" id="txtlinkman" class="easyui-textbox" />
         </div>
         <div style="margin-top:5px;">
             <a id="btnSearch" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">查询</a>
-            <a id="btnSearch" href="@Url.Action("Edit","Company",new { area = "Contract"})" class="easyui-linkbutton easyui-linkbutton-cstype">新建</a>            
+            <a id="btnSearch" href="@Url.Action("Edit","Company",new { area = "Contract"})" class="easyui-linkbutton easyui-linkbutton-cstype">新建</a>
         </div>
     </div>
 

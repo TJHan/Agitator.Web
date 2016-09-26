@@ -12,6 +12,8 @@ using Rock.Common.Helper;
 using Agitator.Business.Entity.ContractEntity;
 using Agitator.Business.Services;
 using Agitator.Business.Entity.CommonEntity;
+using Agitator.Business.Helper;
+using Agitator.Business.Common;
 
 namespace Agitator.Business.Controllers.Contract
 {
@@ -36,6 +38,7 @@ namespace Agitator.Business.Controllers.Contract
             queryData.PageIndex = 0;
             queryData.PageSize = 0;
             var result = _cServices.GetCompanyList(queryData);
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -75,7 +78,7 @@ namespace Agitator.Business.Controllers.Contract
             if (!string.IsNullOrEmpty(id))
             {
                 var result = _cServices.GetCompanyDetails(id);
-                if (result == null)
+                if (result != null)
                 {
                     model.id = result.id;
                     model.unitId = result.unitId;
@@ -95,6 +98,12 @@ namespace Agitator.Business.Controllers.Contract
                     model.setMan = result.setMan;
                 }
             }
+            else
+            {
+                model.setDate = DateTime.Now.ToString();
+                //登记人字段暂用登录用户的登录名
+                model.setMan = RequestUser.CurrentRequestUser.CurrentLoginUserInfo.user.loginName;
+            }
             LoadDropDownListData();
             return View(model);
         }
@@ -102,13 +111,17 @@ namespace Agitator.Business.Controllers.Contract
         [HttpPost]
         public ActionResult Edit(CompanyEdit model)
         {
+            //日期格式转换成Unix时间戳格式。
+            if (!string.IsNullOrEmpty(model.setDate))
+                model.setDate = DateTimeHelper.ConvertDateTimeInt(model.setDate.ToDateTime()).ToString();
             if (model.id > 0)
             {
-                //修改
+                //修改                
                 Entity.ResultEntity updateResult = _cServices.UpdateCompany(model);
-
+                ShowMessageHelper.MessageBoxBackPage("单位信息修改成功");
             }
-            else {
+            else
+            {
                 //新建
                 CompanyAdd entity = new CompanyAdd()
                 {
@@ -129,12 +142,18 @@ namespace Agitator.Business.Controllers.Contract
                 };
 
                 ResultAddCompany addResult = _cServices.AddCompany(entity);
-                if (addResult.result == "1")
+                if (addResult != null && addResult.result == "1")
                 {
                     model.id = addResult.id;
                     model.unitId = addResult.unitId;
+                    ShowMessageHelper.MessageBoxBackPage("单位信息创建成功");
+                }
+                else
+                {
+                    ShowMessageHelper.MessageBoxBackPage("服务器异常，请稍后再试");
                 }
             }
+            LoadDropDownListData();
             return View(model);
         }
 

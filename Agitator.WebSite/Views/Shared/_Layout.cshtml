@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/themes/gray/css")
+    @Styles.Render("~/Content/themes/bootstrap/css")
     @Styles.Render("~/Content/themes/easyui/custom")
+    @Styles.Render("~/Content/Custom/gray")
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @*引用easyui脚本*@
@@ -16,6 +18,6 @@
 </head>
 <body style="padding-top:0px;">
     @RenderBody()
-    @RenderSection("scripts", required: false)
+    @*@RenderSection("scripts", required: false)*@
 </body>
 </html>

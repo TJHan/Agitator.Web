@@ -29,70 +29,125 @@
 </script>
 <div class="easyui-tabs" style="width:100%;height:700px;">
     <div title="单位详情" style="padding:10px;">
-        <div class="title">
-            单位信息
-        </div>
-        <div class="fitem">
-            <label>单位编号: </label>
-            <label>@Model.unitId</label>
-        </div>
-        <div class="fitem">
-            <label>单位名称: </label>
-            <label>@Model.unitName</label>
-        </div>
-        <div class="fitem">
-            <label>单位简称: </label>
-            <label></label>
-        </div>
-        <div class="fitem">
-            <label>地址: </label>
-            <label>@Model.address</label>
-        </div>
-        <div class="fitem">
-            <label>业务类型: </label>
-            <label></label>【指定该单位与本公司的业务关系】
-        </div>
-        <div class="fitem">
-            <label>法人代表: </label>
-            <label>@Model.cop</label>
-        </div>
-        <div class="fitem">
-            <label>联系人: </label>
-            <label>@Model.linkman</label>
-        </div>
-        <div class="fitem">
-            <label>联系电话1: </label>
-            <label>@Model.tel1</label>
-        </div>
-        <div class="fitem">
-            <label>联系电话2: </label>
-            <label>@Model.tel2</label>
-        </div>
-        <div class="fitem">
-            <label>传真号码: </label>
-            <label>@Model.fax</label>
-        </div>
-        <div class="fitem">
-            <label>等级: </label>
-            <label></label>
-        </div>
-        <div class="fitem">
-            <label>登记人: </label>
-            <label>@Model.setMan</label>
-        </div>
-        <div class="fitem">
-            <label>登记时间: </label>
-            <label>@Model.setDate</label>
-        </div>
-        <div class="fitem">
-            <label>备注: </label>
-            <label>@Model.remark</label>
-        </div>
-        <a id="btnEdit" href="@Url.Action("Edit","Company",new { area = "Contract",id = Model.id })" class="easyui-linkbutton easyui-linkbutton-cstype">修改</a>
-        <a id="btnDelete" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">删除</a>
-        @*<a id="btnState" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">启用</a>*@
-        <a id="btnBacktoindex" href="@Url.Action("Index","Company",new { area="Contract"})" class="easyui-linkbutton easyui-linkbutton-cstype">返回</a>
-        
+        <div class="easyui-panel" style="width:600px;padding:10px 10px;">
+            <table class="form-tab">
+                <tr>
+                    <td>
+                        <label>单位编号:</label>
+                    </td>
+                    <td>
+                        <label>@Model.unitId</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>单位名称:</label>
+                    </td>
+                    <td>
+                        <label>@Model.unitName</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>单位简称:</label>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>地址:</label>
+                    </td>
+                    <td>
+                        <label>@Model.address</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>业务类型:</label>
+                    </td>
+                    <td>
+                        <label>@Model.typeId</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>法人代表: </label>
+                    </td>
+                    <td>
+                        <label>@Model.cop</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>联系人: </label>
+                    </td>
+                    <td>
+                        <label>@Model.linkman</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>联系电话1: </label>
+                    </td>
+                    <td>
+                        <label>@Model.tel1</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>联系电话2: </label>
+                    </td>
+                    <td>
+                        <label>@Model.tel2</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>传真号码: </label>
+                    </td>
+                    <td>
+                        <label>@Model.fax</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>等级: </label>
+                    </td>
+                    <td>
+                        <label>@Model.gradeSid</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>登记人: </label>
+                    </td>
+                    <td>
+                        <label>@Model.setMan</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>登记时间: </label>
+                    </td>
+                    <td>
+                        <label>@Model.setDate</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>备注: </label>
+                    </td>
+                    <td>
+                        <label>@Model.remark</label>
+                    </td>
+                </tr>
+            </table>
+            <a id="btnEdit" href="@Url.Action("Edit","Company",new { area = "Contract",id = Model.id })" class="easyui-linkbutton easyui-linkbutton-cstype">修改</a>
+            <a id="btnDelete" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">删除</a>
+            @*<a id="btnState" href="#" class="easyui-linkbutton easyui-linkbutton-cstype">启用</a>*@
+            <a id="btnBacktoindex" href="@Url.Action("Index","Company",new { area="Contract"})" class="easyui-linkbutton easyui-linkbutton-cstype">返回</a>        
+        </div>       
+       
     </div>
     <div title="站点同步" closable="false" style="padding:10px;">
         Second Tab

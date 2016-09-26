@@ -38,6 +38,10 @@ namespace Agitator.Business.Services.ContractServices
                 result.rows.ToList().ForEach(d =>
                 {
                     d.setDate = DateTimeHelper.ConvertIntToDateTimeString(d.setDate);
+                    if (!string.IsNullOrEmpty(d.notused))
+                    {
+                        d.State = d.notused == "0" ? "已停用" : "已启用";
+                    }
                 });
             }
             return result;

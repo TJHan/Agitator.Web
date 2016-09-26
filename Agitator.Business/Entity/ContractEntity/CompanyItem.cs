@@ -42,5 +42,18 @@ namespace Agitator.Business.Entity.ContractEntity
         public string setMan { get; set; }
         public string remark { get; set; }
         public string unitName { get; set; }
+        /// <summary>
+        /// 状态，页面使用
+        /// </summary>
+        public string State { get; set; }
+        /// <summary>
+        /// 等级名称
+        /// </summary>
+        public string GradeName { get; set; }
+        /// <summary>
+        /// 类型名称
+        /// </summary>
+        public string TypeName { get; set; }
+
     }
 }

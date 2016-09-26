@@ -49,7 +49,10 @@ namespace Agitator.WebSite
 
             bundles.Add(new StyleBundle("~/Content/themes/easyui/custom").Include("~/Content/themes/easyUI_CustomMain.css"));
 
+            //自定义样式风格包
+            bundles.Add(new StyleBundle("~/Content/Custom/gray").IncludeDirectory("~/Content/themes/Custom/gray", "*.css"));
 
+            bundles.Add(new StyleBundle("~/Content/Custom/blue").IncludeDirectory("~/Content/themes/Custom/blue", "*.css"));
         }
     }
 }

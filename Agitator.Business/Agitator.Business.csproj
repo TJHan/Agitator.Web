@@ -80,6 +80,7 @@
     <Compile Include="Filters\AuthAttribute.cs" />
     <Compile Include="Helper\CommonHtmlHelper.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
+    <Compile Include="Helper\ShowMessageHelper.cs" />
     <Compile Include="HttpHandler\CallAPIHelper.cs" />
     <Compile Include="Models\Contract\EditCompanyModel.cs" />
     <Compile Include="Models\Home\LoginModel.cs" />
