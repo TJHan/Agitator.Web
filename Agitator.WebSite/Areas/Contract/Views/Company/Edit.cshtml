@@ -73,7 +73,7 @@
                             <label>业务类型:</label>
                         </td>
                         <td>
-                            @Html.DropDownListFor(d => d.typeId, ViewData["CompanyTypeList"] as List<SelectListItem>)
+                            @Html.DropDownListFor(d => d.typeId, ViewData["CompanyTypeList"] as List<SelectListItem>, new { @class = "easyui-combobox" })
                             【指定该单位与本公司的业务关系】
                         </td>
                     </tr>
@@ -122,7 +122,7 @@
                             <label>等级: </label>
                         </td>
                         <td>
-                            @Html.DropDownListFor(d => d.gradeSid, ViewData["CompanyGradeList"] as List<SelectListItem>)
+                            @Html.DropDownListFor(d => d.gradeSid, ViewData["CompanyGradeList"] as List<SelectListItem>, new { @class = "easyui-combobox",style="width:100px;" })
                         </td>
                     </tr>
                     <tr>
