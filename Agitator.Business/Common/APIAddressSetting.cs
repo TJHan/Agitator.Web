@@ -65,5 +65,12 @@ namespace Agitator.Business.Common
         public static readonly string API_POST_GETSysPowerByLoginName = ConfigurationManager.AppSettings["API_POST_GETSysPowerByLoginName"];
         #endregion
 
+        #region 操作站点API
+        /// <summary>
+        /// 获取站点集合数据接口
+        /// </summary>
+        public static readonly string API_POST_GETSiteList = ConfigurationManager.AppSettings["API_POST_GETSiteList"];
+        #endregion
+
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="Entity\ContractEntity\ResultAddCompany.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\ResultEntity.cs" />
+    <Compile Include="Entity\StationEntity\StationItem.cs" />
     <Compile Include="Entity\SystemEntity\Menu.cs" />
     <Compile Include="Entity\UserEntity\LoginUserInfo.cs" />
     <Compile Include="Filters\AuthAttribute.cs" />
@@ -86,18 +87,21 @@
     <Compile Include="Models\Home\LoginModel.cs" />
     <Compile Include="Models\SystemModels\MenuModel.cs" />
     <Compile Include="ParameterEntity\ParamsCompanySearch.cs" />
+    <Compile Include="ParameterEntity\ParamsStationSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\RequestUser.cs" />
     <Compile Include="Services\AccountServices\AccountService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\CommonServices\CommonCompanyService.cs" />
     <Compile Include="Services\ContractServices\CompanyServices.cs" />
+    <Compile Include="Services\StationServices\StationServices.cs" />
     <Compile Include="Services\SystemServices\MenuService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controllers\Station\" />
     <Folder Include="Document\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

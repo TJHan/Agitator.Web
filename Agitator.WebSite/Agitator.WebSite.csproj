@@ -294,6 +294,7 @@
     <Content Include="Content\themes\bootstrap\window.css" />
     <Content Include="Content\themes\color.css" />
     <Content Include="Content\themes\Custom\gray\form.css" />
+    <Content Include="Content\themes\Custom\gray\main.css" />
     <Content Include="Content\themes\default\accordion.css" />
     <Content Include="Content\themes\default\calendar.css" />
     <Content Include="Content\themes\default\combo.css" />

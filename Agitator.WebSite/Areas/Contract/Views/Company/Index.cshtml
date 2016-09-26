@@ -12,6 +12,8 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/bootstrap/css")
     @Styles.Render("~/Content/themes/easyui/custom")
+    @Styles.Render("~/Content/Custom/gray")
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @*引用easyui脚本*@
@@ -24,7 +26,7 @@
         function InitGrid(queryData) {
             $("#tabMain").datagrid({
                 url: '@Url.Action("LoadCompanyList", "Company", new { area="Contract"})',
-                title: '单位查询',
+                title: '',
                 iconCls: 'icon-save',
                 dataType: 'json',
                 rownumbers: true, //是否加行号
@@ -55,8 +57,8 @@
                     { field: 'linkman', title: '联系人', width: 100 },
                     { field: 'cop', title: '法人', width: 100 },
                     {
-                        field: 'State', title: '状态', width: 100, formatter: function (value,row,index) {
-                            return "<span id='unitState_"+row.id+"'>"+row.State+"</span>";
+                        field: 'State', title: '状态', width: 100, formatter: function (value, row, index) {
+                            return "<span id='unitState_" + row.id + "'>" + row.State + "</span>";
                         }
                     },
                     { field: 'setMan', title: '登记人', width: 100 },
@@ -147,7 +149,8 @@
     </script>
 </head>
 <body style="padding-top:0px;">
-    <div id="tabSearch" style="padding:3px">
+    <div class="page_subMarginTop"></div>
+    <div id="tabSearch" style="padding:3px;">
         <div style="margin-top:5px;">
             单位编号：
             <input type="text" id="txtUnitId" class="easyui-textbox" />
