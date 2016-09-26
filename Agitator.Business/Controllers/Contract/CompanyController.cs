@@ -7,13 +7,16 @@ using System.Web;
 using System.Web.Mvc;
 using Agitator.Business.Filters;
 using Agitator.Business.Services.ContractServices;
+using Agitator.Business.Services.StationServices;
 using Agitator.Business.ParameterEntity;
 using Rock.Common.Helper;
 using Agitator.Business.Entity.ContractEntity;
-using Agitator.Business.Services;
 using Agitator.Business.Entity.CommonEntity;
+using Agitator.Business.Entity.StationEntity;
+using Agitator.Business.Services;
 using Agitator.Business.Helper;
 using Agitator.Business.Common;
+using Agitator.Business.Models.Contract;
 
 namespace Agitator.Business.Controllers.Contract
 {
@@ -28,6 +31,7 @@ namespace Agitator.Business.Controllers.Contract
         {
             _cServices = new CompanyServices();
         }
+
         public ActionResult Index()
         {
             return View();
@@ -104,6 +108,9 @@ namespace Agitator.Business.Controllers.Contract
                 //登记人字段暂用登录用户的登录名
                 model.setMan = RequestUser.CurrentRequestUser.CurrentLoginUserInfo.user.loginName;
             }
+            EditCompanyModel returnModel = new EditCompanyModel();
+            returnModel.CompanyEntity = model;
+
             LoadDropDownListData();
             return View(model);
         }
@@ -186,6 +193,32 @@ namespace Agitator.Business.Controllers.Contract
             }
             ViewData["CompanyTypeList"] = typeSelect;
             ViewData["CompanyGradeList"] = gradeSelect;
+        }
+
+        /// <summary>
+        /// 根据条件获取可配置的站点数据集合
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
+        public ActionResult LoadStationList(ParamsStationSearch search)
+        {
+            StationServices sService = new StationServices();            
+            var result= sService.GetStationList(search);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取已设置的单位同步站点数据集合
+        /// </summary>
+        /// <param name="id">单位主键ID</param>
+        /// <returns></returns>
+        public ActionResult LoadSyncStationList(string id)
+        {
+            ParamsSyncStationSearch search = new ParamsSyncStationSearch {
+                unitId=id.ToInt()                
+            };
+            var result = _cServices.GetSyncStationList(search);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

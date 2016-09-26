@@ -39,6 +39,27 @@ namespace Agitator.Business.Common
         /// 停用/启用企业单位API
         /// </summary>
         public static readonly string API_POST_SETUnitState = ConfigurationManager.AppSettings["API_POST_SETUnitState"];
+
+        /// <summary>
+        /// 获取已分配到单位的站点集合接口
+        /// </summary>
+        public static readonly string API_POST_GETUnitSyncList = ConfigurationManager.AppSettings["API_POST_GETUnitSyncList"];
+        
+        /// <summary>
+        /// 新增单位到指定站点的同步配置接口
+        /// </summary>
+        public static readonly string API_POST_ADDUnitSync = ConfigurationManager.AppSettings["API_POST_ADDUnitSync"];
+
+        /// <summary>
+        /// 删除单位到某个站点的同步配置接口
+        /// </summary>
+        public static readonly string API_POST_DELETEUnitSync = ConfigurationManager.AppSettings["API_POST_DELETEUnitSync"];
+
+        /// <summary>
+        /// 设置单位到某个站点的同步配置的开关接口
+        /// </summary>
+        public static readonly string API_POST_SETUnitSyncState = ConfigurationManager.AppSettings["API_POST_SETUnitSyncState"];
+
         #endregion
 
         #region 公共操作API

@@ -115,6 +115,61 @@ namespace Agitator.Business.Services.ContractServices
             return result;
         }
 
+        /// <summary>
+        /// 获取已分配到单位的站点数据集合
+        /// </summary>
+        /// <param name="searchEntity"></param>
+        /// <returns></returns>
+        public SyncStationList GetSyncStationList(ParamsSyncStationSearch searchEntity)
+        {
+            Dictionary<string, string> paramsList = new Dictionary<string, string>() {
+                { "page",searchEntity.page.ToString()},
+                { "rows",searchEntity.rows.ToString()},
+                { "unitId",searchEntity.unitId.ToString()}
+            };
+            SyncStationList result = CallAPIHelper.CallAPIInPOST<SyncStationList>(APIAddressSetting.API_POST_GETUnitSyncList, paramsList);
+            return result;
+        }
 
+        /// <summary>
+        /// 添加一条单位同步站点的数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public AddResultEntity AddStationSync(SyncStationAdd entity)
+        {
+            AddResultEntity result = CallAPIHelper.CallAPIInPOST<AddResultEntity>(APIAddressSetting.API_POST_ADDUnitSync, entity);
+            return result;
+        }
+
+        /// <summary>
+        /// 删除单位站点同步记录
+        /// </summary>
+        /// <param name="id">单位站点同步记录的主键ID</param>
+        /// <returns></returns>
+        public DeleteResultEntity DeleteStationSync(string id)
+        {
+            Dictionary<string, string> paramsList = new Dictionary<string, string>() {
+                { "id", id }
+            };
+            DeleteResultEntity result = CallAPIHelper.CallAPIInPOST<DeleteResultEntity>(APIAddressSetting.API_POST_DELETEUnitSync, paramsList);
+            return result;
+        }
+
+        /// <summary>
+        /// 修改已配置的单位站点同步的状态； 0：暂停，1：启用
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
+        public ResultEntity SetStationSyncState(string id, string state)
+        {
+            Dictionary<string, string> paramsList = new Dictionary<string, string>() {
+                { "id", id },
+                { "enable", state }
+            };
+            ResultEntity result = CallAPIHelper.CallAPIInPOST<ResultEntity>(APIAddressSetting.API_POST_SETUnitSyncState, paramsList);
+            return result;
+        }
     }
 }
