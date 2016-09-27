@@ -1,6 +1,31 @@
-﻿<div class="easyui-layout" data-options="fit:true">
-    <div data-options="region:'east',split:true" style="width:100px"></div>
-    <div data-options="region:'center'" style="padding:10px;">
-        jQuery EasyUI framework help you build your web page easily.
+﻿<script>
+    function InitSyncGrid()
+    {
+        $("#tabSyncMain").datagrid({
+            url: '',
+            title: '',
+            iconCls: 'icon-save',
+            dataType: 'json',
+            rownumbers: true, //是否加行号
+            autoRowHeight: false,
+            pageSize: 50,
+            singleSelect: true,
+            idField: 'id',
+            column: [[
+
+            ]]
+        });
+    }
+</script>
+<div class="easyui-layout" data-options="fit:true">
+    <div style="width:500px;">
+        <table id="tabSyncMain" class="easyui-datagrid" data-options="view:scrollview,pageSize:100" style="height:400px;width:100%;"></table>
+    </div>
+    <div style="width:100px;">
+        <a style="width:60px;">&lt;</a>
+        <a style="width:60px;">&gt;</a>
+    </div>
+    <div style="width:500px;">
+        <table id="tabStationMain" class="easyui-datagrid" data-options="view:scrollview,pageSize:100" style="height:400px;width:100%;"></table>
     </div>
 </div>
