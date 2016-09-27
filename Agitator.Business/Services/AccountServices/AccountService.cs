@@ -65,7 +65,8 @@ namespace Agitator.Business.Services
         /// <returns></returns>
         public bool LogOut()
         {
-            return false;
+            SessionHelper.ClearCurrentSession();
+            return true;
         }
     }
 }
