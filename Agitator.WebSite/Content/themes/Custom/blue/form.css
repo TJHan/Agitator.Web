@@ -1,5 +1,5 @@
 ﻿.form-tab {
-    border: 1px solid #D4D4D4;
+    border: 1px solid #a0c6e5;
     padding: 3px;
     width: 100%;
     margin: 3px 3px 15px 3px;
@@ -8,12 +8,12 @@
 
 .form-tab td {
     padding: 3px;
-    border: 1px solid #D4D4D4;
+    border: 1px solid #a0c6e5;
 }
 
 .form-tab td:first-child {
     width: 120px;
     text-align: right;
-    background-color: #e5e4e4;
+    background-color: #cfe7fa;
 }
 

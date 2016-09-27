@@ -128,6 +128,12 @@ namespace Agitator.Business.Services.ContractServices
                 { "unitId",searchEntity.unitId.ToString()}
             };
             SyncStationList result = CallAPIHelper.CallAPIInPOST<SyncStationList>(APIAddressSetting.API_POST_GETUnitSyncList, paramsList);
+            if (result != null && result.rows != null)
+            {
+                result.rows.ToList().ForEach(d => {
+                    d.operationDate = DateTimeHelper.ConvertIntToDateTimeString(d.operationDate);
+                });
+            }
             return result;
         }
 

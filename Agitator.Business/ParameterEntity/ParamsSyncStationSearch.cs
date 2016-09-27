@@ -13,6 +13,10 @@ namespace Agitator.Business.ParameterEntity
     {
         public int page { get; set; }
         public int rows { get; set; }
+
+        /// <summary>
+        /// 单位主键ID
+        /// </summary>
         public int unitId { get; set; }
     }
 }

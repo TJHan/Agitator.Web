@@ -293,6 +293,7 @@
     <Content Include="Content\themes\bootstrap\validatebox.css" />
     <Content Include="Content\themes\bootstrap\window.css" />
     <Content Include="Content\themes\color.css" />
+    <Content Include="Content\themes\Custom\blue\form.css" />
     <Content Include="Content\themes\Custom\gray\form.css" />
     <Content Include="Content\themes\Custom\gray\main.css" />
     <Content Include="Content\themes\default\accordion.css" />
@@ -611,7 +612,6 @@
     <Folder Include="Areas\Contract\Views\Engineering\" />
     <Folder Include="Areas\Contract\Views\OrderContract\" />
     <Folder Include="Areas\Contract\Views\Shared\" />
-    <Folder Include="Content\themes\Custom\blue\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

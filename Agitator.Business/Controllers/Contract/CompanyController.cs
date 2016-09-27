@@ -81,6 +81,7 @@ namespace Agitator.Business.Controllers.Contract
             CompanyEdit model = new CompanyEdit();
             if (!string.IsNullOrEmpty(id))
             {
+                //修改
                 var result = _cServices.GetCompanyDetails(id);
                 if (result != null)
                 {
@@ -104,12 +105,11 @@ namespace Agitator.Business.Controllers.Contract
             }
             else
             {
+                //新建
                 model.setDate = DateTime.Now.ToString();
                 //登记人字段暂用登录用户的登录名
                 model.setMan = RequestUser.CurrentRequestUser.CurrentLoginUserInfo.user.loginName;
             }
-            EditCompanyModel returnModel = new EditCompanyModel();
-            returnModel.CompanyEntity = model;
 
             LoadDropDownListData();
             return View(model);
@@ -176,6 +176,14 @@ namespace Agitator.Business.Controllers.Contract
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 维护单位同步站点数据Action
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SyncUnitMain()
+        {
+            return View();
+        }
         private void LoadDropDownListData()
         {
             CommonCompanyService commons = new CommonCompanyService();
@@ -202,8 +210,8 @@ namespace Agitator.Business.Controllers.Contract
         /// <returns></returns>
         public ActionResult LoadStationList(ParamsStationSearch search)
         {
-            StationServices sService = new StationServices();            
-            var result= sService.GetStationList(search);
+            StationServices sService = new StationServices();
+            var result = sService.GetStationList(search);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -214,8 +222,9 @@ namespace Agitator.Business.Controllers.Contract
         /// <returns></returns>
         public ActionResult LoadSyncStationList(string id)
         {
-            ParamsSyncStationSearch search = new ParamsSyncStationSearch {
-                unitId=id.ToInt()                
+            ParamsSyncStationSearch search = new ParamsSyncStationSearch
+            {
+                unitId = id.ToInt()
             };
             var result = _cServices.GetSyncStationList(search);
             return Json(result, JsonRequestBehavior.AllowGet);
